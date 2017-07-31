@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+    }
+}
+
+plugins {
+    id 'groovy'
+    id 'eclipse'
+    id 'maven'
+    id 'jacoco'
+    id 'com.github.hierynomus.license' version '0.14.0'
+}
+
+tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+tasks.withType(GroovyCompile) { options.encoding = 'UTF-8' }
+
+group = 'com.blackducksoftware.integration'
+
+version = '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+}
+
+license {
+    header = file('HEADER')
+    ext.year = Calendar.getInstance().get(Calendar.YEAR)
+    ignoreFailures = true
+    includes (["**/*.groovy", "**/*.java"])
+    exclude "/src/test/*"
+}
+
+tasks.licenseMain.dependsOn(licenseFormatMain)
