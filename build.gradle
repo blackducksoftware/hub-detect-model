@@ -32,6 +32,8 @@ repositories {
 }
 
 dependencies {
+    compile 'com.blackducksoftware.integration:integration-bdio:4.1.1'
+    compile 'org.codehaus.groovy:groovy-all:2.4.11'
 }
 
 license {
