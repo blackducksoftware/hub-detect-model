@@ -40,5 +40,6 @@ public enum BomToolType {
     PEAR,
     PIP,
     RUBYGEMS,
-    SBT;
+    SBT,
+    YARN;
 }
