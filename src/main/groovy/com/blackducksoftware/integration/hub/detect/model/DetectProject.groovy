@@ -23,16 +23,34 @@
 package com.blackducksoftware.integration.hub.detect.model
 
 class DetectProject {
+
+    private String defaultProjectName
+    private String defaultProjectVersionName
+
     private String projectName
     private String projectVersionName
+
     private List<DetectCodeLocation> detectCodeLocations = []
 
+    public DetectProject(String defaultProjectName, String defaultProjectVersionName){
+        this.defaultProjectName = defaultProjectName;
+        this.defaultProjectVersionName = defaultProjectVersionName;
+    }
+
     public String getProjectName() {
-        projectName
+        if (projectName){
+            projectName
+        }else{
+            defaultProjectName
+        }
     }
 
     public String getProjectVersionName() {
-        projectVersionName
+        if (projectVersionName){
+            projectVersionName
+        }else{
+            defaultProjectVersionName
+        }
     }
 
     public void addAllDetectCodeLocations(List<DetectCodeLocation> detectCodeLocations) {
@@ -52,7 +70,7 @@ class DetectProject {
     }
 
     public String getCodeLocationName(final BomToolType bomToolType, String finalSourcePathPiece, String prefix, String suffix) {
-        String codeLocation = String.format('%s/%s/%s/%s %s', bomToolType.toString(), finalSourcePathPiece, projectName, projectVersionName, suffix)
+        String codeLocation = String.format('%s/%s/%s/%s %s', bomToolType.toString(), finalSourcePathPiece, getProjectName(), getProjectVersionName(), suffix)
         if (prefix) {
             codeLocation = String.format('%s/%s', prefix, codeLocation)
         }
@@ -61,7 +79,7 @@ class DetectProject {
 
     public String getCodeLocationName(final String canonicalProjectSourcePath, final String canonicalCodeLocationSourcePath, String finalSourcePathPiece, String prefix, String suffix) {
         String sourcePath = canonicalCodeLocationSourcePath.replace(canonicalProjectSourcePath, finalSourcePathPiece);
-        String codeLocation = String.format('%s/%s/%s %s', sourcePath, projectName, projectVersionName, suffix)
+        String codeLocation = String.format('%s/%s/%s %s', sourcePath, getProjectName(), getProjectVersionName(), suffix)
         if (prefix) {
             codeLocation = String.format('%s/%s', prefix, codeLocation)
         }
