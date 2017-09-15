@@ -33,6 +33,8 @@ public enum BomToolType {
     GO_GODEP,
     GO_VNDR,
     GRADLE,
+    REBAR,
+    HEX_ELIXR,
     MAVEN,
     NPM,
     NUGET,
