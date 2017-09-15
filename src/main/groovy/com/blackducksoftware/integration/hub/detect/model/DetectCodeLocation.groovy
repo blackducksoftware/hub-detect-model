@@ -60,7 +60,7 @@ class DetectCodeLocation {
             'bdio'
         ].collect { integrationEscapeUtil.escapeForUri(it) }
 
-        String filename = safePieces.join('_') + '.jsonld'
+        String filename = safePieces.iterator().join('_') + '.jsonld'
         filename
     }
 
