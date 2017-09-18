@@ -61,6 +61,23 @@ class DetectCodeLocation {
     }
 
     public String createBdioFilename(IntegrationEscapeUtil integrationEscapeUtil, String finalSourcePathPiece, String projectName, String projectVersionName) {
+        String filename = generateFilename(integrationEscapeUtil, finalSourcePathPiece, projectName, projectVersionName)
+        for (int i = 0; (filename.length() >= 255) || (i >= 3); i++) {
+            if (i == 0) {
+                finalSourcePathPiece = String.valueOf(finalSourcePathPiece.hashCode())
+            } else if (i == 1) {
+                projectVersionName = String.valueOf(projectVersionName.hashCode())
+            } else if (i == 2) {
+                projectName = String.valueOf(projectName.hashCode())
+            }
+
+            filename = generateFilename(integrationEscapeUtil, finalSourcePathPiece, projectName, projectVersionName)
+        }
+
+        filename
+    }
+
+    private String generateFilename(IntegrationEscapeUtil integrationEscapeUtil, String finalSourcePathPiece, String projectName, String projectVersionName) {
         List<String> safePieces = [
             bomToolType.toString(),
             projectName,
@@ -69,7 +86,7 @@ class DetectCodeLocation {
             'bdio'
         ].collect { integrationEscapeUtil.escapeForUri(it) }
 
-        String filename = safePieces.join('_') + '.jsonld'
+        String filename = safePieces.iterator().join('_') + '.jsonld'
         filename
     }
 

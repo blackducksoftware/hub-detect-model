@@ -32,6 +32,8 @@ repositories {
 dependencies {
     compile 'com.blackducksoftware.integration:integration-bdio:4.2.1'
     compile 'org.codehaus.groovy:groovy-all:2.4.11'
+    testCompile 'junit:junit:4.10'
+    testCompile 'org.apache.commons:commons-lang3:3.5'
 }
 
 license {
@@ -39,7 +41,7 @@ license {
     ext.year = Calendar.getInstance().get(Calendar.YEAR)
     ignoreFailures = true
     includes (["**/*.groovy", "**/*.java"])
-    exclude "/src/test/*"
+    excludes (["/src/test/*.groovy", "src/test/*.java"])
 }
 
 tasks.licenseMain.dependsOn(licenseFormatMain)
