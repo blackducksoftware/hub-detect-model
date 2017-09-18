@@ -51,23 +51,6 @@ class DetectProject {
         detectCodeLocations.add(detectCodeLocation)
     }
 
-    public String getCodeLocationName(final BomToolType bomToolType, String finalSourcePathPiece, String prefix, CodeLocationType codeLocationType) {
-        String codeLocation = String.format('%s/%s/%s %s/%s', finalSourcePathPiece, projectName, projectVersionName, bomToolType.toString().toLowerCase(), codeLocationType.toString().toLowerCase())
-        if (prefix) {
-            codeLocation = String.format('%s/%s', prefix, codeLocation)
-        }
-        codeLocation
-    }
-
-    public String getCodeLocationName(final String canonicalProjectSourcePath, final String canonicalCodeLocationSourcePath, String finalSourcePathPiece, String prefix, CodeLocationType codeLocationType) {
-        String sourcePath = canonicalCodeLocationSourcePath.replace(canonicalProjectSourcePath, finalSourcePathPiece)
-        String codeLocation = String.format('%s/%s/%s %s', sourcePath, projectName, projectVersionName, codeLocationType.toString().toLowerCase())
-        if (prefix) {
-            codeLocation = String.format('%s/%s', prefix, codeLocation)
-        }
-        codeLocation
-    }
-
     public List<DetectCodeLocation> getDetectCodeLocations() {
         detectCodeLocations
     }
